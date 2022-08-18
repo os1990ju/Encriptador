@@ -24,15 +24,21 @@ html{
     font-family: 'Inter' sans-serif;
 }
 header{
-    display: flex;
-    flex-direction: column;
+    display: relative;
     width: 100%;
     min-width: 320px;
     height: 96px;
 }
 header img{
     margin-top: 20px;
-    align-self: flex-start;
+    position: absolute;
+    top: auto;
+    left: -20px;
+}
+.main-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .main--input-container{
     display: flex;
@@ -40,7 +46,7 @@ header img{
     justify-content: space-between;
     margin-left: 16px;
     height: 220px;
-    margin-bottom: 10px
+    /* margin-bottom: 10px */
 }
 .main--input-container input{
     margin-top: 56px;
@@ -60,6 +66,7 @@ header img{
     width: 343px;
     height: 48px;
 }
+
 .main--input-container p{
     display: flex;
     flex-direction: row;
@@ -99,12 +106,20 @@ border: solid 0.1rem var(--soft-blue);
     background-color: var(--soft-blue);
     border: none;
     color: var(--white);
+    transition: 0.5s;
     }
+.encriptar:hover {
+    background-color: var(--white); /* Green */
+    color: var(--soft-blue);
+    border: 0.1rem solid var(--soft-blue);
+}
 .footer--container{
+    width: 34.3rem;
+    padding: 3.2rem;
     margin: 4.0rem 2.4rem;
     background-color: var(--white);
     border-radius: 3.2rem;
-    height: 18.6rem;
+    /* height: 18.6rem; */
     padding: 3.2rem;
     display: flex;
     flex-direction: column;
@@ -118,6 +133,7 @@ border: solid 0.1rem var(--soft-blue);
     font-weight: bold;
     color: var(--gray-dark);
     text-align: center;
+    margin-bottom: 1.6rem;
 }
 .footer--text{
     font-size: 1.6rem;
@@ -125,4 +141,60 @@ border: solid 0.1rem var(--soft-blue);
     font-weight: 400;
     color: var(--gray-dark);
     text-align: center;
+}
+.footer--copy{
+    font-size: 1.4rem;
+    font-weight: bolder;
+    padding: 0.5rem;
+    width: 6rem;
+    border-radius: 0.5rem;
+    align-self: center;
+    background-color: var(--soft-blue);
+    border: none;
+    color: var(--white);
+}
+.copy--button{
+    background-color: var(--white);
+    align-self: center;
+    width: 27.3rem;
+    height: 6.7rem;
+    border-radius: 2.4rem;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.936rem;
+    color: var(--soft-blue);
+    border: solid 0.1rem var(--soft-blue);
+}
+/*Escritorio*/
+@media (min-width: 900px)  {
+    main{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+  
+  .main-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 50rem;
+  }
+  .main--button-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap:1rem;
+  }
+  .main--button{
+    width: 28rem;
+  }
+  .footer--container{
+    height: 50rem;
+    background-image: url('./assets/img/Muñeco.png');
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+
+  }
 }

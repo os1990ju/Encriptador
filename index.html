@@ -12,22 +12,123 @@
     <header>
         <img src="./assets/img/Logo.png" alt="logo Alura">
     </header>
+    <div class="main-container">
     <main>
         <div class="main--input-container">
-            <input type="text" placeholder="ingrese el texto aqui...">
+            <input type="text" id= "inputText" placeholder="ingrese el texto aqui...">
             <p><span></span>Solo letras minúsculas y sin acentos</p>
             
         </div>
         <div class="main--button-container">
-            <button class="main--button encriptar">Encriptar</button>
-            <button class="main--button desencriptar">Desencriptar</button>
+            <button class="main--button encriptar" id="encriptar">Encriptar</button>
+            <button class="main--button desencriptar" id="desencriptar">Desencriptar</button>
         </div>
     </main>
     <footer>
         <div class="footer--container">
-            <h2 class="footer--title">Ningún mensaje fue encontrado</h2>
-            <p class="footer--text">Ingresa el texto que desees encriptar o desencriptar.</p>
+            <h2 class="footer--title" id="titleTexto">Ningún mensaje fue encontrado</h2>
+            <p class="footer--text" id="texto">Ingresa el texto que desees encriptar o desencriptar.</p>
+            <!-- <button class="copy--button">Copiar</button> -->
         </div>
     </footer>
+</div>
+    <script>
+        let input;
+        let message;
+        const encripta = (letra)=>{
+            switch(letra){
+                case 'a': 
+                letra='ai';
+                break;
+                case 'e': 
+                letra='enter';
+                break;
+                case 'i': 
+                letra='imes';
+                break;
+                case 'o': 
+                letra='ober';
+                break;
+                case 'u': 
+                letra='ufat';
+                break;
+                default:
+                letra;
+                break;
+            }
+            return letra;
+        }
+        
+        const printCoder = (m)=>{
+            // crear boton 
+            const boton = document.createElement('button');
+            boton.setAttribute('class','copy--button');
+            boton.innerText='Copiar';
+            document.querySelector('.footer--container').remove();
+            const container = document.createElement('div');
+            container.setAttribute('class','footer--container footer--title');
+            document.querySelector('footer').append(container)
+            container.append(m,boton)
+            
+
+        }
+        const copyText = ()=> {
+            // let texto = document.querySelector('div.footer--container.footer--title').firstChild.textContent;
+            // navigator.clipboard.writeText(texto)
+
+            // .then(() => {
+            //     console.log('texto copiado'+': '+ texto)
+            //  })
+            // .catch(err => {
+            //     console.error('Error in copying text: ', err);
+            //     });
+       
+            var codigoACopiar = document.querySelector('div.footer--container.footer--title').firstChild;
+            var seleccion = document.createRange();
+            seleccion.selectNodeContents(codigoACopiar);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(seleccion);
+            var res = document.execCommand('copy');
+            window.getSelection().removeRange(seleccion);
+        }
+        const clickHandler = (e)=>{
+            input = document.querySelector('#inputText');
+            let message = input.value;
+            input.value = '';
+            let secret = "";
+            if(e.target.className === 'main--button encriptar'){
+                let arr = message.split('');
+            secret = arr.map(item=>encripta(item)).join('');
+            }
+            if(e.target.className === 'main--button desencriptar') {
+                String.prototype.allReplace = function(obj) {
+                var retStr = this;
+                for (var x in obj) {
+                    retStr = retStr.replace(new RegExp(x, 'g'), obj[x]);
+                }
+            return retStr;
+            };
+            secret = message.allReplace({'ai': 'a', 'enter': 'e', 'imes':'i', 'ober':'o', 'ufat':'u'});
+            } 
+            printCoder(secret);
+
+        }
+        
+        
+        let encriptar = document.querySelector('#encriptar');
+        let res = encriptar.addEventListener('click',clickHandler);
+        let btndec = document.querySelector('#desencriptar');
+        btndec.addEventListener('click',clickHandler)
+        // let btnDec = document.querySelector('#desencriptar');
+        // btnDec.addEventListener('click',clickHandler)
+        let btnCopy = document.querySelector('footer');
+        btnCopy.addEventListener('click',copyText);        
+        // document.getElementById('inputText').addEventListener('paste', interceptarPegado);
+
+        // function interceptarPegado(ev) {
+        //     alert('Has pegado el texto:' + ev.clipboardData.getData('text/plain'));
+        // }
+        
+    </script>
 </body>
 </html>
